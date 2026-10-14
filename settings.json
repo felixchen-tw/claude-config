@@ -1,4 +1,36 @@
 {
+  "hooks": {
+    "Notification": [
+      { "hooks": [ { "type": "command", "command": "$HOME/.config/iterm2/cc-status" } ] }
+    ],
+    "PermissionRequest": [
+      { "hooks": [ { "type": "command", "command": "$HOME/.config/iterm2/cc-status" } ] }
+    ],
+    "PostToolUse": [
+      { "hooks": [ { "type": "command", "command": "$HOME/.config/iterm2/cc-status" } ] }
+    ],
+    "PreToolUse": [
+      { "hooks": [ { "type": "command", "command": "$HOME/.config/iterm2/cc-status" } ] }
+    ],
+    "SessionEnd": [
+      { "hooks": [ { "type": "command", "command": "$HOME/.config/iterm2/cc-status" } ] }
+    ],
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "$HOME/.config/iterm2/cc-status" } ] }
+    ],
+    "Stop": [
+      { "hooks": [ { "type": "command", "command": "$HOME/.config/iterm2/cc-status" } ] }
+    ],
+    "StopFailure": [
+      { "hooks": [ { "type": "command", "command": "$HOME/.config/iterm2/cc-status" } ] }
+    ],
+    "SubagentStop": [
+      { "hooks": [ { "type": "command", "command": "$HOME/.config/iterm2/cc-status" } ] }
+    ],
+    "UserPromptSubmit": [
+      { "hooks": [ { "type": "command", "command": "$HOME/.config/iterm2/cc-status" } ] }
+    ]
+  },
   "model": "claude-opus-5-5",
   "enabledPlugins": {
     "remember@claude-plugins-official": true,
@@ -21,7 +53,7 @@
     "felix-mods": {
       "source": {
         "source": "directory",
-        "path": "/home/felix/.claude/mods"
+        "path": "/Users/felix/.claude/mods"
       }
     },
     "claude-community": {
