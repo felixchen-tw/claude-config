@@ -6,3 +6,6 @@
 !/settings.json
 !/keybindings.json
 !/mods/
+!/skills/
+/skills/synced/
+/skills/ai-level-check
