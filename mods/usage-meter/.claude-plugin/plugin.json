@@ -1,0 +1,1 @@
+{ "name": "usage-meter", "version": "0.1.0", "description": "Current session (5h) and weekly usage as progress bars above the prompt", "types": "./types/index.d.ts" }

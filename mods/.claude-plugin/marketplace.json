@@ -1,0 +1,8 @@
+{
+  "name": "felix-mods",
+  "owner": { "name": "felix" },
+  "plugins": [
+    { "name": "usage-meter", "source": "./usage-meter" },
+    { "name": "task-progress", "source": "./task-progress" }
+  ]
+}

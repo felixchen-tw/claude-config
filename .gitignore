@@ -1,0 +1,8 @@
+# 白名單：只同步設定與自製 mod，其餘（憑證、歷史、快取、session、記憶）不進 git
+/*
+!/.gitignore
+!/README.md
+!/CLAUDE.md
+!/settings.json
+!/keybindings.json
+!/mods/
