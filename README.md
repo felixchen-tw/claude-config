@@ -24,4 +24,25 @@ iTerm2 的狀態 hook 只在 `~/.config/iterm2/cc-status` 存在時執行，其�
 `skills/` 裡的 caveman 系列與 find-skills 是從 `npx skills` 複製進來的實體檔（不再 symlink 到 `~/.agents`），要更新就重跑 `npx skills add JuliusBrussee/caveman -g` 後再複製進來。
 claude.ai 內建的 skills（`skills/synced/`）跟著帳號同步，不用處理。
 
-同步：`git -C ~/.claude pull` / `git -C ~/.claude commit -am ... && git push`
+同步：`git -C ~/.claude pull` / `git -C ~/.claude commit -am ... && git push`（新檔要先 `git add`）
+
+## macOS 這台：settings.json 設了 skip-worktree
+
+Claude Code 會把本機專屬的 `autoMode` 區塊（含 `/Users/felix` 路徑）寫進 `settings.json`，而 `autoMode` 只能放 user 或 managed 設定，沒有 user 層級的 local 檔可以放，所以這台用 `git update-index --skip-worktree settings.json` 讓 git 忽略本機改動。副作用：
+
+- `git status` 看起來乾淨，但遠端改過 `settings.json` 時 `git pull`（和 `setup.sh`）會報 `Your local changes ... would be overwritten`。
+- `commit -am` 不會帶到 `settings.json`；這台改的共用設定要照下面流程手動處理。
+
+pull 失敗時：備份、取遠端版本、把 `autoMode` 合回去、再設回 skip-worktree。
+
+```bash
+cd ~/.claude
+cp settings.json backups/settings.json.pre-pull
+jq .autoMode settings.json > backups/automode.json
+git update-index --no-skip-worktree settings.json
+git checkout settings.json && git pull --ff-only
+jq --slurpfile a backups/automode.json '.autoMode=$a[0]' settings.json > backups/settings.tmp && mv backups/settings.tmp settings.json
+git update-index --skip-worktree settings.json
+```
+
+要從這台推 `settings.json` 的改動：先 `--no-skip-worktree`，用 `jq 'del(.autoMode)'` 產生要 commit 的版本，commit 推完再把 `autoMode` 合回去、設回 skip-worktree。
