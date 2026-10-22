@@ -6,6 +6,8 @@
 !/settings.json
 !/keybindings.json
 !/mods/
+!/setup.sh
+!/setup.ps1
 !/skills/
 /skills/synced/
 /skills/ai-level-check

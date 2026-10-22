@@ -4,24 +4,19 @@
 
 ```bash
 git clone git@github.com:felixchen-tw/claude-config.git ~/.claude   # ~/.claude 已存在就先移開，再把憑證搬回來
-git clone https://github.com/Raymondhou0917/ai-level-check ~/ai-level-check && ln -s ~/ai-level-check ~/.claude/skills/ai-level-check
 ```
 
-外部 skill（clone 到 `~/projects/` 再 symlink 進來，`git pull` 即更新；symlink 不進 git，每台各建一次）：
+外部 skill（ai-level-check、speak-human-tw）：pull 完跑一次 setup，會 clone 到固定位置再 symlink／junction 進 `skills/`，可重複執行。symlink 不進 git，所以每台各跑一次。
 
 ```bash
-# Ubuntu / macOS
-git clone https://github.com/Raymondhou0917/speak-human-tw.git ~/projects/speak-human-tw
-ln -s ~/projects/speak-human-tw ~/.claude/skills/speak-human-tw
+sh ~/.claude/setup.sh                                  # Ubuntu / macOS
 ```
 
 ```powershell
-# Windows 11（PowerShell；junction 不需管理員或開發人員模式）
-git clone https://github.com/Raymondhou0917/speak-human-tw.git $HOME\projects\speak-human-tw
-New-Item -ItemType Junction -Path $HOME\.claude\skills\speak-human-tw -Target $HOME\projects\speak-human-tw
+powershell -ExecutionPolicy Bypass -File $HOME\.claude\setup.ps1   # Windows 11，junction 不需管理員
 ```
 
-更新：`git -C ~/projects/speak-human-tw pull`
+要加新的外部 skill，就在兩支腳本各加一行 `skill` 呼叫。更新：`git -C <skill 目錄> pull`。
 
 啟動 Claude Code 後，`settings.json` 裡的 plugin 會自動安裝。
 `felix-mods` 的 marketplace 路徑寫成 `~/.claude/mods`（Claude Code 會展開 `~`），Ubuntu／macOS／Windows 共用同一份 `settings.json`，不用改。
