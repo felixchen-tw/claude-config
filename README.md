@@ -33,16 +33,6 @@ Claude Code 會把本機專屬的 `autoMode` 區塊（含 `/Users/felix` 路徑�
 - `git status` 看起來乾淨，但遠端改過 `settings.json` 時 `git pull`（和 `setup.sh`）會報 `Your local changes ... would be overwritten`。
 - `commit -am` 不會帶到 `settings.json`；這台改的共用設定要照下面流程手動處理。
 
-pull 失敗時：備份、取遠端版本、把 `autoMode` 合回去、再設回 skip-worktree。
-
-```bash
-cd ~/.claude
-cp settings.json backups/settings.json.pre-pull
-jq .autoMode settings.json > backups/automode.json
-git update-index --no-skip-worktree settings.json
-git checkout settings.json && git pull --ff-only
-jq --slurpfile a backups/automode.json '.autoMode=$a[0]' settings.json > backups/settings.tmp && mv backups/settings.tmp settings.json
-git update-index --skip-worktree settings.json
-```
+這台改用 `sh ~/.claude/sync-pull.sh` 取代 `git pull`（`setup.sh` 也是呼叫它）：pull 被擋時會備份到 `backups/settings.json.pre-pull`、取遠端版本、把本機 `autoMode` 合回去、再設回 skip-worktree；第二次 pull 仍失敗就還原本機檔。需要 `jq`。
 
 要從這台推 `settings.json` 的改動：先 `--no-skip-worktree`，用 `jq 'del(.autoMode)'` 產生要 commit 的版本，commit 推完再把 `autoMode` 合回去、設回 skip-worktree。

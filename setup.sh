@@ -3,7 +3,7 @@
 set -e
 # 先更新設定 repo；sh 邊讀邊執行，pull 可能改到本檔，所以 pull 完 exec 新版重跑一次
 if [ -z "$SETUP_PULLED" ]; then
-  git -C "$HOME/.claude" pull --ff-only
+  sh "$HOME/.claude/sync-pull.sh"
   SETUP_PULLED=1 exec sh "$0" "$@"
 fi
 skill() { # 名稱 repo 目標目錄

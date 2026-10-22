@@ -7,6 +7,7 @@
 !/keybindings.json
 !/mods/
 !/setup.sh
+!/sync-pull.sh
 !/setup.ps1
 !/skills/
 /skills/synced/
