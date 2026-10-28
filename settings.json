@@ -1,4 +1,5 @@
 {
+  "model": "claude-opus-5-5",
   "hooks": {
     "Notification": [
       {
@@ -101,7 +102,6 @@
       }
     ]
   },
-  "model": "claude-opus-5-5",
   "enabledPlugins": {
     "remember@claude-plugins-official": true,
     "code-review@claude-plugins-official": true,
@@ -111,7 +111,8 @@
     "ponytail@ponytail": true,
     "usage-meter@felix-mods": true,
     "task-progress@felix-mods": true,
-    "next-steps@claude-community": true
+    "next-steps@claude-community": true,
+    "mattpocock-skills@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "ponytail": {
